@@ -1,6 +1,5 @@
 from django import middleware
 from django.http import HttpResponseRedirect
-from minidetector import settings as minidetector_settings
 from minidetector.useragents import search_strings
 
 class Middleware(object):
@@ -16,6 +15,7 @@ class Middleware(object):
                 Middleware.configure_request(request)
                 Middleware.set_session_from_request(request)
                 request.session['mobile_checked'] = True
+                from minidetector import settings as minidetector_settings
                 if request.mobile and minidetector_settings.MOBILE_URL:
                     return HttpResponseRedirect(minidetector_settings.MOBILE_URL)
             else:
@@ -54,6 +54,7 @@ class Middleware(object):
 
     @staticmethod
     def configure_request(request):
+        from minidetector import settings as minidetector_settings
         # default all possible attributes for desktop
         request.mobile = False
         request.wap = False
