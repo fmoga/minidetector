@@ -11,6 +11,9 @@ setup(
         "minidetector",
         "minidetector.tests",
     ],
+    package_data = {
+        '': ['*.txt'],
+    },
     classifiers = [
         "Development Status :: 3 - Alpha",
         "Environment :: Web Environment",
